@@ -90,6 +90,59 @@ a:visited {
   padding-bottom: 0;
 }
 
+.inline-block {
+  display: inline-block;
+}
+
+.inline {
+  display: inline;
+}
+
+.profile-picture {
+  border-radius: 50%;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.only-show-mobile {
+  display: none;
+}
+
+.right {
+  float: right;
+  height: 80px;
+}
+
+.center {
+  /*margin-top: auto;
+  margin-bottom: auto;
+  padding-top: auto;
+  padding-bottom: auto;*/
+  align-self: center;
+  vertical-align: middle;
+}
+
+.center-content {
+  padding-top: auto;
+  padding-bottom: auto;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+.red-debug {
+  background-color: #ff0000;
+}
+
+.green-debug {
+  background-color: #00ff00;
+}
+
+.blue-debug {
+  background-color: #0000ff;
+}
+
 @media screen and (orientation: portrait) {
   .input-with-label {
     margin-bottom: 10px;
@@ -106,4 +159,13 @@ a:visited {
   #login-username {
     width: 28ch
   }
+
+  .no-show-mobile {
+    display: none;
+  }
+
+  .only-show-mobile {
+    display: initial;
+  }
+  
 }
