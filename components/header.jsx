@@ -6,7 +6,7 @@ import { useContext } from 'react'
 export default function Header({title, user}){
 	//const user = useContext(UserContext)
 
-	console.log("Header user:", user)
+	//console.log("Header user:", user)
 
 	function myLoader({src}){
 		return src
