@@ -16,13 +16,21 @@ mark {
 }
 
 a {
+  color: black;
+  text-decoration: none;
+}
+a:visited {
+  color: black;
+}
+
+.read-more {
   color: #0070f3;
   text-decoration: none;
 }
-a:hover {
+.read-more:hover {
   text-decoration: underline;
 }
-a:visited {
+.read-more:visited {
   color: #0070f3;
 }
 
@@ -62,6 +70,10 @@ a:visited {
 
 #login-password {
   width: 28ch;
+}
+
+#repos {
+  margin-top: 10px;
 }
 
 .text-input-label {
@@ -171,6 +183,30 @@ a:visited {
 
 .logout-button:active {
   background-color: rgb(110, 134, 173);
+}
+
+.repo-entry {
+  color: black;
+  padding: 16px 10px;
+  width: 50%;
+}
+
+.repo-entry:hover {
+  background-color: #dce5f0;
+}
+
+.repo-title {
+  margin: 0;
+}
+
+.repo-desc {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.repo-lang {
+  margin: 0;
+  font-weight: bold;
 }
 
 .page-selector {
@@ -305,6 +341,10 @@ a:visited {
 
   .mini-profile-container-mobile {
     display: block;
+  }
+
+  .repo-entry {
+    width: 100%;
   }
   
 }

@@ -78,7 +78,7 @@ export default function Home() {
 					
 						{/*<mark>Remember to treat your personal access tokens like passwords (i.e. keep them secret)!</mark>*/}
 
-						<p><a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token" target="_blank">
+						<p><a className='read-more' href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token" target="_blank">
 							Read more about GitHub personal access tokens and how to generate one.
 						</a></p>
 					</section>

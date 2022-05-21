@@ -130,19 +130,27 @@ export default function Home() {
 					</div>
 					<div className='input-with-label'>
 						<button className='primary-button space-right' onClick={() => {list_repos(username)}}>Get Repos</button>
-						<button className='primary-button' onClick={() => {list_repos(userContext.login)}}>My Repos</button>
+						{userContext ? <button className='primary-button' onClick={() => {list_repos(userContext.login)}}>My Repos</button> : null}
 					</div>
 				</section>
-				<section>
+
+				<section id="repos">
 					{repos.map((repo) => {return (
-						<div key={String(repo.id)}>
-							<h2>
-								<a href={repo.html_url} target="_blank">
+
+						<div className='repo-entry' key={String(repo.id)}>
+							<a className='repo-link' href={repo.html_url} target="_blank">
+								<h2 className='repo-title'>
 									{repo.name}
-								</a>
-							</h2>
-							{repo.description ? <p>{repo.description}</p> : <p><em>no description</em></p>}
-							{repo.language ? <p>{repo.language}</p> : <p><em>unknown language</em></p>}
+								</h2>
+
+								<p className='repo-desc'>
+									{Boolean(repo.description) ? repo.description : <em>no description</em>}
+								</p>
+								
+								<p className='repo-lang'>
+									{Boolean(repo.language) ? repo.language : <em>unknown language</em>}
+								</p>
+							</a>
 						</div>
 						
 					)})}
