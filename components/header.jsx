@@ -16,8 +16,17 @@ export default function Header({title, user}){
 		<header className={styles.header}>
 			<h1 className='inline-block center-content'>{title}</h1>
 			{user ?
-			<div className='right inline-block no-show-mobile center-content'>
-				{(user?.avatar_url) ? <Image src={user.avatar_url} width={48} height={48} loader={myLoader} className="profile-picture" /> : null}
+			<div className='right inline-block no-show-mobile'>
+				<div>
+					{/*(user?.avatar_url) ? <Image src={user.avatar_url} width={48} height={48} loader={myLoader} className="profile-picture" /> : null*/}
+					<div className='username-logged-in'>
+						{user.login}
+					</div>
+				</div>
+				<div className='full-width'>
+					<button className='logout-button full-width'>Logout</button>
+				</div>
+				
 			</div>
 			: null}
 		</header>

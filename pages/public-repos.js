@@ -13,24 +13,86 @@ import { UserContext } from '../context'
 export default function Home() {
 
 	const [username, setUsername] = useState("")
-	const [isOrg, setIsOrg] = useState(false)
 	const [repos, setRepos] = useState([])
+	const [prev, setPrev] = useState("")
+	const [next, setNext] = useState("")
 
 	const userContext = useContext(UserContext).user
 
-	async function list_repos(){
+	async function list_repos(user){
 		try {
+			console.log("listing repos for user " + user)
 			if (userContext.token){
 				const octokit = new Octokit({
 					auth: userContext.token
 				})
 			
 			
-				const res = await octokit.request('GET /users/{username}/repos', {
-					username
+				const res = await octokit.request('GET /users/{user}/repos', {
+					user
 				})
 				console.log(res)
 				setRepos(res.data)
+
+				if (res.headers.link){
+					const links = res.headers.link.split(",")
+					var _next = ""
+					var _prev = ""
+					links.forEach((link) => {
+						let [url, rel] = link.split(";")
+						url = url.replace("<", "").replace(">", "").trim()
+						rel = rel.replace("rel=\"", "").replace("\"", "").trim()
+						console.log(rel + ": " + url)
+						if (rel == "next"){
+							_next = url
+						} else if (rel == "prev"){
+							_prev = url
+						}
+					})
+					setNext(_next)
+					setPrev(_prev)
+				}
+
+			} else {
+				alert("Logged out")
+			}
+
+		} catch (err) {
+			console.error(err)
+			alert(err.message)
+		}
+	}
+
+	async function change_page(link){
+		try {
+			console.log("listing repos: " + link)
+			if (userContext.token){
+				const octokit = new Octokit({
+					auth: userContext.token
+				})
+
+				const res = await octokit.request(link)
+				console.log(res)
+				setRepos(res.data)
+
+				if (res.headers.link){
+					const links = res.headers.link.split(",")
+					var _next = ""
+					var _prev = ""
+					links.forEach((link) => {
+						let [url, rel] = link.split(";")
+						url = url.replace("<", "").replace(">", "").trim()
+						rel = rel.replace("rel=\"", "").replace("\"", "").trim()
+						console.log(rel + ": " + url)
+						if (rel == "next"){
+							_next = url
+						} else if (rel == "prev" || rel == "previous"){
+							_prev = url
+						}
+					})
+					setNext(_next)
+					setPrev(_prev)
+				}
 
 			} else {
 				alert("Logged out")
@@ -61,22 +123,30 @@ export default function Home() {
 						<input className='text-input' type="text" id="username" placeholder="Username" onChange={(event) => {setUsername(event.target.value)}} />
 					</div>
 					<div className='input-with-label'>
-						<input className='text-input' type="checkbox" id="is-org" placeholder="Username" onChange={(event) => {setIsOrg(event.target.checked)}} />
-						<label className='text-input-label' htmlFor='is-org'>User is organization</label>
+						<button className='primary-button' onClick={() => {list_repos(username)}}>Get Repos</button>
 					</div>
 					<div className='input-with-label'>
-						<button className='primary-button' onClick={() => {list_repos()}}>Get Repos</button>
+						<button className='primary-button' onClick={() => {list_repos(userContext.login)}}>My Repos</button>
 					</div>
 				</section>
 				<section>
 					{repos.map((repo) => {return (
 						<div key={String(repo.id)}>
-							<h2>{repo.name}</h2>
+							<h2>
+								<a href={repo.html_url} target="_blank">
+									{repo.name}
+								</a>
+							</h2>
 							{repo.description ? <p>{repo.description}</p> : <p><em>no description</em></p>}
 							{repo.language ? <p>{repo.language}</p> : <p><em>unknown language</em></p>}
 						</div>
 						
 					)})}
+					<div className='page-selector'>
+						<button className={"page-selector-prev " + (Boolean(prev) ? 'primary-button' : 'primary-button-disabled')} onClick={() => {change_page(prev)}} disabled={!prev}>{"<<"}</button>
+						<button className={"page-selector-next " + (Boolean(next) ? 'primary-button' : 'primary-button-disabled')} onClick={() => {change_page(next)}} disabled={!next}>{">>"}</button>
+					</div>
+					
 				</section>
 			</main>
 
