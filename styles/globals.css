@@ -30,6 +30,21 @@ a:visited {
   box-sizing: border-box;
 }
 
+.header {
+  background-color: #87aade;
+  color: black;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: auto;
+  padding-bottom: auto;
+  height: 80px;
+  /*box-shadow: 0 0 10px 0 #00000050;*/
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
 .text-input {
   font-size: large;
   border: 1px solid #00000080;
@@ -97,12 +112,46 @@ a:visited {
   width: 100%
 }
 
-.username-logged-in {
+.mini-profile-nomobile {
+  float: right;
+  display: flex;
+  flex-direction: row;
   width: 12em;
-  font-size: 20px;
+  height: 30px;
   margin-top: 4px;
   margin-bottom: 10px;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+.mini-profile-mobile {
+  display: none;
+}
+
+.mini-profile-container-mobile {
+  display: none;
+}
+
+.logged-in-as {
+  margin-right: 5px;
+}
+
+.profile-picture {
+  display: inline-block;
+  border-radius: 50%;
+  height: 24px;
+  width: 24px;
+  vertical-align: middle;
+}
+
+.username-logged-in {
+  display: inline-block;
+  font-size: 20px;
   text-align: center;
+  font-weight: bold;
+  vertical-align: middle;
+  margin-left: 5px;
 }
 
 .logout-button {
@@ -128,6 +177,7 @@ a:visited {
   width: 100%;
   flex-direction: column;
   justify-content: space-between;
+  margin-top: 32px;
 }
 
 .page-selector-prev {
@@ -144,18 +194,16 @@ a:visited {
   padding-bottom: 0;
 }
 
+.space-right {
+  margin-right: 10px;
+}
+
 .inline-block {
   display: inline-block;
 }
 
 .inline {
   display: inline;
-}
-
-.profile-picture {
-  border-radius: 50%;
-  margin-top: 16px;
-  margin-bottom: 16px;
 }
 
 .only-show-mobile {
@@ -196,7 +244,12 @@ a:visited {
   background-color: #0000ff;
 }
 
-@media screen and (orientation: portrait) {
+/*@media screen and (orientation: portrait) {*/
+@media (max-width: 600px) {
+  .header {
+    height: 120px;
+  }
+
   .input-with-label {
     margin-bottom: 10px;
     display: block;
@@ -227,6 +280,31 @@ a:visited {
 
   .page-selector-next {
     float: right;
+  }
+
+  .mini-profile-nomobile {
+    display: none;
+  }
+
+  .mini-profile-mobile {
+    display: inline-flex;
+    flex-direction: row;
+    height: 32px;
+    width: 75%;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    align-items: center;
+    justify-content: flex-start;
+    vertical-align: middle;
+  }
+
+  .logout-button {
+    float: right;
+    margin-top: 6px;
+  }
+
+  .mini-profile-container-mobile {
+    display: block;
   }
   
 }

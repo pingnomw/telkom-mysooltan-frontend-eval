@@ -51,6 +51,9 @@ export default function Home() {
 					})
 					setNext(_next)
 					setPrev(_prev)
+				} else {
+					setNext("")
+					setPrev("")
 				}
 
 			} else {
@@ -92,6 +95,9 @@ export default function Home() {
 					})
 					setNext(_next)
 					setPrev(_prev)
+				} else {
+					setNext("")
+					setPrev("")
 				}
 
 			} else {
@@ -123,9 +129,7 @@ export default function Home() {
 						<input className='text-input' type="text" id="username" placeholder="Username" onChange={(event) => {setUsername(event.target.value)}} />
 					</div>
 					<div className='input-with-label'>
-						<button className='primary-button' onClick={() => {list_repos(username)}}>Get Repos</button>
-					</div>
-					<div className='input-with-label'>
+						<button className='primary-button space-right' onClick={() => {list_repos(username)}}>Get Repos</button>
 						<button className='primary-button' onClick={() => {list_repos(userContext.login)}}>My Repos</button>
 					</div>
 				</section>

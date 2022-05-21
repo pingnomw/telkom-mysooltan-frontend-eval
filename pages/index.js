@@ -32,7 +32,7 @@ export default function Home() {
 			// if login was successful (200 = OK, 304 = not modified)
 			if (res.status == 200 || res.status == 304 || res.status == "200" || res.status == "304") {
 				userContext.changeUser({...res.data, token})
-				router.push("/public-repos")
+				router.replace("/public-repos")
 			}
 
 		} catch (err) {
